@@ -1,17 +1,24 @@
 require("dotenv").config();
 const login = require("fca-unofficial");
+const fs = require("fs");
 
 
 const facebookAccountCrenentials = {
-    email : process.env.ACCOUNT_EMAIL,
-    password : process.env.ACCOUNT_PASSWORD
+    appState: JSON.parse(fs.readFileSync('fbstate.json', 'utf8'))
 }
-console.log(facebookAccountCrenentials)
-// Create simple echo bot
 login(facebookAccountCrenentials , (err, api) => {
     if(err) return console.error(err);
- 
-    api.listen((err, message) => {
-        api.sendMessage(message.body, message.threadID);
+
+    api.setOptions({listenEvents: true});
+
+    var listenEmitter = api.listen((err, event) => {
+        if(err) return console.error(err);
+        
+        if (event.type === "message" || event.type === "message_reply") {
+            api.markAsRead(event.threadID, (err) => {
+                if(err) return console.log(err);
+            });
+            setTimeout(() => api.sendMessage("You said: " + event.body, event.threadID , event.messageID), 3000)
+        }
     });
 });
