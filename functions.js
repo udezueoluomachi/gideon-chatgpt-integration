@@ -5,5 +5,5 @@ const _exports = module.exports
 _exports.returnBotTypingTimeInSeconds = function (textLength) {
     let typingSpeed = 56;
     let typingTimeInMinutes = ((textLength / typingSpeed));
-    return typingTimeInMinutes * 60000
+    return typingTimeInMinutes * 1000
 };

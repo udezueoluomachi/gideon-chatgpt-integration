@@ -35,7 +35,7 @@ login(facebookAccountCrenentials , (err, api) => {
                 openai.createCompletion({
                   model: "text-davinci-003",
                   prompt: event.body,
-                  temperature: 1,
+                  temperature: 0.2,
                   "max_tokens": 2048
                 })
                 .then(response => response.data.choices[0].text)
