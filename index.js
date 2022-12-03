@@ -20,7 +20,7 @@ const facebookAccountCrenentials = {
 }
 login(facebookAccountCrenentials , (err, api) => {
     if(err) return console.error(err);
-
+    console.log("Bot online\nHello, my name is Gideon")
     api.setOptions({listenEvents: true});
 
     var listenEmitter = api.listen((err, event) => {
@@ -35,7 +35,7 @@ login(facebookAccountCrenentials , (err, api) => {
                 openai.createCompletion({
                   model: "text-davinci-003",
                   prompt: event.body,
-                  temperature: 0.2,
+                  temperature: 0,
                   "max_tokens": 2048
                 })
                 .then(response => response.data.choices[0].text)
