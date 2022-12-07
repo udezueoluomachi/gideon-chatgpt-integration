@@ -1,4 +1,8 @@
-let num = 1
-if(num === 2 || "2") {
-    console.log(4)
+const parentString = "tabahademulya";
+
+let numberOfOutput = 13;
+
+for(let i = 0; i< numberOfOutput; i++) {
+    let outputString = parentString.substring(i) + parentString.replace(parentString.substring(i), "")
+    console.log(outputString)
 }
