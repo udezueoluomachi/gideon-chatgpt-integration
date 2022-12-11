@@ -1,12 +1,14 @@
 "use strict";
 
-export const returnBotTypingTimeInSeconds = function (textLength) {
+const _exports = module.exports
+
+_exports.returnBotTypingTimeInSeconds = function (textLength) {
     let typingSpeed = 56;
     let typingTimeInMinutes = ((textLength / typingSpeed));
     return typingTimeInMinutes * 6000
 };
 
-export const checkIfBotName = function(message) {
+_exports.checkIfBotName = function(message) {
     const botNameSearch = new RegExp("gideon","gi");
     message = message.replace(/\p{Extended_Pictographic}/gu, "");
     return new Promise(function (resolve, reject) {
