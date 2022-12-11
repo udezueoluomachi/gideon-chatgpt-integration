@@ -49,7 +49,10 @@ import("chatgpt")
                                         setTimeout(() => api.sendMessage(response, event.threadID , event.messageID), 3000);
                                     }
                                 })
-                                .catch(err => {return console.log(err)})
+                                .catch(err => {
+                                    setTimeout(() => api.sendMessage("Unfortunately, an error occured", event.threadID , event.messageID), 3000);
+                                    return console.log(err)
+                                })
                             })
                             .catch(err => {return console.log(err)})
                         }
@@ -64,7 +67,10 @@ import("chatgpt")
                                     setTimeout(() => api.sendMessage(response, event.threadID , event.messageID), 3000);
                                 }
                             })
-                            .catch(err => {return console.log(err)})
+                            .catch(err => {
+                                setTimeout(() => api.sendMessage("Unfortunately, an error occured", event.threadID , event.messageID), 3000);
+                                return console.log(err)
+                            })
                         }
                     }
                 }
