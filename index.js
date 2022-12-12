@@ -31,17 +31,17 @@ import("chatgpt")
                 if(err) return console.error(err);
                 
                 if (event.type === "message" || event.type === "message_reply") {
-                    api.markAsRead(event.threadID, (err) => {
+                    api.markAsRead(event.threadID,true , (err) => {
                         if(err) return console.log(err);
                     });
                     if(event.body) {
                         if(event.isGroup) {
                             checkIfBotName(event.body)
                             .then(message => {
-                                api.sendTypingIndicator(event.threadID, err => {if(err) return console.log(err)})
                                 //AI response
                                 _chatgptInstance.sendMessage(message)
                                 .then(response => {
+                                    api.sendTypingIndicator(event.threadID, err => {if(err) return console.log(err)})
                                     if(response.length > 0) {
                                         setTimeout(() => api.sendMessage(response, event.threadID , event.messageID), returnBotTypingTimeInSeconds(response.length));
                                     }
@@ -57,9 +57,9 @@ import("chatgpt")
                             .catch(err => {return console.log(err)})
                         }
                         else {
-                            api.sendTypingIndicator(event.threadID, err => {if(err) return console.log(err)})
                             //AI response
                             _chatgptInstance.sendMessage(event.body).then(response => {
+                                api.sendTypingIndicator(event.threadID, err => {if(err) return console.log(err)})
                                 if(response.length > 0) {
                                     setTimeout(() => api.sendMessage(response, event.threadID , event.messageID), returnBotTypingTimeInSeconds(response.length));
                                 }
